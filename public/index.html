@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogicTrack CRM — Заказы</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div>
+          <p class="app__eyebrow">Transport Logistics CRM</p>
+          <h1>Контроль и сопровождение заказов</h1>
+          <p class="app__subtitle">
+            Первый этап: создание заказа, контроль данных, подготовка к синхронизации с Google Drive.
+          </p>
+        </div>
+        <div class="app__status" id="driveStatus">Google Drive: не подключен</div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Новый заказ</h2>
+          <form id="orderForm">
+            <div class="field">
+              <label for="recipient">Получатель груза *</label>
+              <input id="recipient" name="recipient" type="text" placeholder="ООО Логистик Про" required />
+            </div>
+            <div class="field">
+              <label for="orderName">Название заказа</label>
+              <input id="orderName" name="orderName" type="text" readonly />
+              <small>Автоматически формируется по получателю груза.</small>
+            </div>
+            <div class="field">
+              <label for="awb">Номер авианакладной *</label>
+              <input id="awb" name="awb" type="text" placeholder="123-45678901" required />
+            </div>
+            <div class="field">
+              <label for="quantity">Количество (шт) *</label>
+              <input id="quantity" name="quantity" type="number" min="1" step="1" required />
+            </div>
+            <div class="field">
+              <label for="weight">Вес (кг) *</label>
+              <input id="weight" name="weight" type="number" min="0" step="0.01" required />
+            </div>
+            <div class="field">
+              <label for="customsCode">Код таможни назначения *</label>
+              <input id="customsCode" name="customsCode" type="text" placeholder="06536" required />
+              <small id="customsName" class="hint">Введите код таможни</small>
+            </div>
+            <div class="field">
+              <label for="notes">Примечания</label>
+              <textarea id="notes" name="notes" rows="4" placeholder="Дополнительные инструкции..."></textarea>
+            </div>
+            <button type="submit" class="primary">Создать заказ</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Google Drive синхронизация</h2>
+          <p>
+            Секция готова к подключению Google Drive API. После настройки создается отдельная папка
+            для документов заказа.
+          </p>
+          <div class="drive-actions">
+            <button id="connectDrive" type="button">Подключить Google Drive</button>
+            <button id="createFolder" type="button" class="primary" disabled>
+              Создать папку для заказа
+            </button>
+          </div>
+          <div class="drive-hint" id="driveHint">
+            Чтобы активировать синхронизацию, укажите CLIENT_ID и API_KEY в <code>app.js</code>.
+          </div>
+        </section>
+      </main>
+
+      <section class="card">
+        <h2>Реестр заказов</h2>
+        <div class="table">
+          <div class="table__row table__head">
+            <span>Название</span>
+            <span>Получатель</span>
+            <span>Авианакладная</span>
+            <span>Кол-во</span>
+            <span>Вес</span>
+            <span>Таможня</span>
+            <span>Папка Drive</span>
+          </div>
+          <div id="ordersList" class="table__body"></div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
