@@ -55,6 +55,11 @@ body {
   font-weight: 600;
 }
 
+.app__status--connected {
+  background: #dcfce7;
+  color: #166534;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
