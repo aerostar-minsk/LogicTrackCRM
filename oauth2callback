@@ -1,0 +1,15 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>OAuth2 Redirect</title>
+<script>
+  // Этот файл доступен по /oauth2callback — он просто перенаправляет на корень
+  // сохраняя query-string (включая code). SPA в корне затем сможет обработать code.
+  (function() {
+    var qs = window.location.search || '';
+    // Перенаправляем на корень, сохраняя query и hash
+    window.location.replace('/' + qs + window.location.hash);
+  })();
+</script>
+<noscript>
+  Для завершения авторизации включите JavaScript или <a href="/">вернитесь вручную</a>.
+</noscript>
